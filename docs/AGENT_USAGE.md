@@ -1,18 +1,8 @@
 # Coding-Agent Usage
 
-## Short Writeup
+I used ChatGPT/Codex as the main coding agent throughout this assignment. I delegated repository scaffolding, repetitive FastAPI route structure, Pydantic schema boilerplate, Next.js component wiring, test boilerplate, Docker/documentation drafts, and UI polish iterations. I personally reviewed and directed the data model, authentication behavior, resume validation, email fallback behavior, state transition flow, documentation scope, and final submission structure because those areas affect correctness, security, and evaluator clarity.
 
-I used a coding agent to scaffold and implement the full-stack assignment. I delegated repetitive project setup, boilerplate API structure, form/dashboard UI wiring, documentation drafts, and local testing commands. I kept the product and architecture decisions human-directed: FastAPI backend, Next.js frontend, SQLite for local review, filesystem resume storage, SMTP-compatible email, and a simple token guard for the internal dashboard.
+One subtle issue produced during iteration was that the internal login page initially stored any typed token and navigated to the dashboard before verifying it with the backend. The backend still protected the data, but the UX was misleading because an invalid token appeared to enter the internal page. I caught this while manually testing invalid credentials and fixed it by validating the token against the protected `GET /api/leads` endpoint before storing it. I also added dashboard logic to clear invalid stored tokens and redirect back to login.
 
-One place agent-generated code can easily be subtly wrong is authentication. A first pass may only hide the internal UI in the browser while leaving backend lead endpoints open. I caught this by checking the API surface and made the backend enforce `Authorization: Bearer <token>` on all internal endpoints, so the data is protected even if someone bypasses the frontend.
-
-## Representative Prompt Logs
-
-- "Read the assignment PDF and summarize the requirements."
-- "Build the required FastAPI and Next.js project end to end."
-- "Add local setup documentation, a design document, and coding-agent usage notes."
-
-## Attribution
-
-See `NOTES.md` for a concise attribution split between agent-assisted implementation and human-directed choices.
+All agent-assisted code was manually reviewed, run locally, tested with Pytest/build checks, and revised before submission.
 
