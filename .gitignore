@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+backend/storage/
+backend/app.db
+
