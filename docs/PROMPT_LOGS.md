@@ -4,11 +4,11 @@
 
 **Prompt**
 
-Read the assignment PDF and summarize the requirements.
+Based on the assignment PDF, turn the requirements into a delivery checklist and map each item to the app feature or document we need to build.
 
 **Agent Output Summary**
 
-The agent identified the public lead form, internal attorney dashboard, FastAPI API requirement, Next.js frontend requirement, persistence, email integration, design doc, local setup doc, and coding-agent usage submission.
+The agent identified the public applicant form, authenticated internal attorney dashboard, FastAPI API requirement, Next.js frontend requirement, persistence, email integration, design document, local setup instructions, prompt logs, attribution notes, and coding-agent usage writeup.
 
 **My Review / Changes**
 
@@ -18,11 +18,11 @@ I confirmed that the product needed two surfaces: a public applicant form and an
 
 **Prompt**
 
-Build the required FastAPI and Next.js project end to end.
+Create a FastAPI + Next.js monorepo for a prospect intake portal with a public submission page, an internal review page, SQLite storage, resume uploads, and local email fallback.
 
 **Agent Output Summary**
 
-The agent scaffolded a monorepo with `backend/`, `frontend/`, and `docs/`, using SQLite, local resume storage, FastAPI routes, and Next.js pages.
+The agent scaffolded a monorepo with `backend/`, `frontend/`, and `docs/`, using SQLite, local resume storage, FastAPI routes, environment examples, and Next.js pages.
 
 **My Review / Changes**
 
@@ -32,7 +32,7 @@ I kept the architecture local-first for reviewer convenience and later added Doc
 
 **Prompt**
 
-Implement lead creation, listing, status update, resume upload/download, auth, and email integration.
+Implement the lead workflow API: create a lead with multipart resume upload, list leads for authenticated attorneys, update status, download resumes, and send the two required emails.
 
 **Agent Output Summary**
 
@@ -46,7 +46,7 @@ I verified that internal endpoints enforce bearer-token auth on the backend, not
 
 **Prompt**
 
-Improve upload handling and tests.
+Add backend validation for resume uploads and write tests for bad file types, invalid email addresses, and oversized files.
 
 **Agent Output Summary**
 
@@ -60,7 +60,7 @@ I added a configurable `MAX_RESUME_BYTES` setting so the local default is 10MB a
 
 **Prompt**
 
-Build an authenticated internal dashboard for attorneys to review leads.
+Build an internal attorney dashboard that requires a token, filters leads by status, supports live refresh, downloads resumes, and marks leads as `REACHED_OUT`.
 
 **Agent Output Summary**
 
@@ -74,7 +74,7 @@ I asked for the public and internal surfaces to be separated in the UI so applic
 
 **Prompt**
 
-Explain why confirmation email is not arriving locally.
+The app says confirmation emails were sent, but I did not receive one locally. Diagnose the email behavior and explain what a reviewer can inspect.
 
 **Agent Output Summary**
 
@@ -88,7 +88,7 @@ I kept the outbox fallback for local demos and documented how to configure SMTP 
 
 **Prompt**
 
-Why does an invalid token still enter the dashboard?
+Invalid attorney tokens still appear to enter the internal dashboard. Find the issue and change the login flow so invalid tokens are rejected before navigation.
 
 **Agent Output Summary**
 
@@ -97,4 +97,3 @@ The agent identified that the login page saved the token before backend validati
 **My Review / Changes**
 
 I changed login to verify the token against the protected FastAPI endpoint before storing it and added dashboard logic to clear invalid stored tokens.
-
